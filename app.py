@@ -242,10 +242,11 @@ with tab1:
         dose_df.columns = ['Dose', 'Quantidade']
         dose_df['Dose'] = dose_df['Dose'].astype(str) + "ª Dose"
         
+        # CORREÇÃO: Utilizando lista explícita de cores no tom Cyan/Teal
         fig_dose = px.bar(
             dose_df, x='Dose', y='Quantidade',
             color='Quantidade',
-            color_continuous_scale=px.colors.sequential.Cyan
+            color_continuous_scale=['#0284c7', '#38bdf8', '#7dd3fc']
         )
         fig_dose.update_layout(coloraxis_showscale=False)
         st.plotly_chart(aplicar_tema_dark(fig_dose), use_container_width=True)
@@ -269,9 +270,10 @@ with tab2:
     vac_df = df_f['vacina_nome'].value_counts().reset_index()
     vac_df.columns = ['Vacina', 'Quantidade']
     
+    # CORREÇÃO: Utilizando escala de cores segura
     fig_vac = px.bar(
         vac_df, x='Quantidade', y='Vacina', orientation='h',
-        color='Quantidade', color_continuous_scale=px.colors.sequential.Teal
+        color='Quantidade', color_continuous_scale=['#0f766e', '#14b8a6', '#2dd4bf']
     )
     fig_vac.update_layout(coloraxis_showscale=False, yaxis=dict(categoryorder='total ascending'))
     st.plotly_chart(aplicar_tema_dark(fig_vac), use_container_width=True)
